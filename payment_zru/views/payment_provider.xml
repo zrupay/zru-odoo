@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="provider_form_zru" model="ir.ui.view">
+        <field name="name">payment.provider.form.zru</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form" />
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="provider_credentials"]' position='inside'>
+                <group invisible="code  != 'zru'">
+                    <field name="zru_public_key" required="code == 'zru'"/>
+                    <field name="zru_secret_key" required="code == 'zru'"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="transaction_form_zru" model="ir.ui.view">
+        <field name="name">provider.transaction.form.zru</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.payment_transaction_form" />
+        <field name="arch" type="xml">
+            <field name="create_date" position='after'>
+                <field name="zru_id" />
+                <field name="zru_sale_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

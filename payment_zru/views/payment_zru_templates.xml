@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+    <template id="zru_form">
+        <form t-att-action="zru_pay_url" method="get">
+        </form>
+    </template>
+</odoo>

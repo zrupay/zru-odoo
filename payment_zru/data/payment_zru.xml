@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="payment_method_zru" model="account.payment.method">
+        <field name="name">ZRU</field>
+        <field name="code">zru</field>
+        <field name="payment_type">inbound</field>
+    </record>
+
+    <record id="payment_method_cc_zru_redirect" model="payment.method">
+        <field name="name">ZRU - Redirect</field>
+        <field name="code">zru_redirect</field>
+        <field name="image" type="base64" file="payment_zru/static/description/icon.png" />
+    </record>
+
+    <record id="payment_provider_zru" model="payment.provider">
+        <field name="name">ZRU</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="payment_zru/static/description/icon.png"
+        />
+        <field name="code">zru</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="redirect_form_view_id" ref="zru_form" />
+        <field name="module_id" ref="base.module_payment_zru" />
+        <field
+            name="pre_msg"
+        ><![CDATA[
+<p>You will be redirected to the ZRU platform after clicking on the payment button.</p>]]></field>
+        <field
+            name="payment_method_ids"
+            eval="[Command.set([
+                         ref('payment_zru.payment_method_cc_zru_redirect'),
+                     ])]"
+        />
+    </record>
+
+</odoo>
+
