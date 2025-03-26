@@ -130,6 +130,15 @@ class ZRUPaymentTransaction(models.Model):
         """ 
         This method update the products, vat and shipping to send to ZRU API
         """
+        if not len(self.sale_order_ids):
+            data['products'] = [{
+                'amount': 1,
+                'product': {
+                    'name': 'Order %s' % data['reference'],
+                    'price': float('%.2f' % self.amount),
+                }
+            }]
+            return
         order = self.sale_order_ids[0]
         products = []
         shipping_name = ''
