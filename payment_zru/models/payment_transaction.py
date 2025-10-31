@@ -19,12 +19,18 @@ class ZRUPaymentTransaction(models.Model):
         self.ensure_one()
 
         zru_values = dict(values)
+        name_splitted = self.partner_name.split(' ', 1)
+        first_name = name_splitted[0]
+        if len(name_splitted) > 1:
+            last_name = name_splitted[1]
+        else:
+            last_name = ' '
         zru_values.update(
             {
                 'currency': self.currency_id.name,
                 'lang': 'au',
-                'first_name': self.partner_name,
-                'last_name': self.partner_name,
+                'first_name': first_name,
+                'last_name': last_name,
                 'address': self.partner_address,
                 'address2': self.partner_address,
                 'zip_code': self.partner_zip,
@@ -166,7 +172,7 @@ class ZRUPaymentTransaction(models.Model):
             products.append(product)
 
         data['shipping_name'] = shipping_name
-        data['shipping_value'] = shipping_value
+        data['shipping_value'] = float('%.2f' % shipping_value)
         data['tax_name'] = tax_name
-        data['tax_value'] = tax_value
+        data['tax_value'] = float('%.2f' % tax_value)
         data['products'] = products
