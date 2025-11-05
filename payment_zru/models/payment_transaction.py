@@ -48,7 +48,7 @@ class ZRUPaymentTransaction(models.Model):
 
         transaction = zru.Transaction(body)
         transaction.save()
-        values['zru_pay_url'] = transaction.pay_url
+        values['zru_pay_url'] = transaction.link
         return values
 
     @api.model

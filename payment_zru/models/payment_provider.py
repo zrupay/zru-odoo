@@ -42,7 +42,7 @@ class ZRUPaymentProvider(models.Model):
                 'billing_country': data['country'],
                 'zru_lib': {
                     'name': 'odoo-17',
-                    'version': '1.0'
+                    'version': '1.3'
                 },
             },
         }
