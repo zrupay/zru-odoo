@@ -166,7 +166,7 @@ class ZRUPaymentTransaction(models.Model):
                 'product': {
                     'product_id': line.product_id.id,
                     'name': line.name[:100],
-                    'price': float('%.2f' % (line.price_total - line.price_tax)),
+                    'price': float(line.price_unit_discounted),
                 }
             }
             products.append(product)
